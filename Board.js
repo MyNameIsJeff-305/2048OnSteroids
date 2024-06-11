@@ -3,6 +3,7 @@ class Board {
         this.width = width;
         this.height = height;
         this.board = this.#setBoard(width, height);
+        this.score = 0;
     }
 
     #setBoard(w, h) {
@@ -70,6 +71,7 @@ class Board {
             if (row[i] === row[i + 1]) {
                 row[i] *= 2;
                 row[i + 1] = 0;
+                score += row[i]
             }
         }
         row = row.filter(val => val); // Remove new zeros
@@ -82,6 +84,7 @@ class Board {
         for (let i = row.length - 1; i > 0; i--) {
             if (row[i] === row[i - 1]) {
                 row[i] *= 2;
+                score += row[i]
                 row[i - 1] = 0;
             }
         }
