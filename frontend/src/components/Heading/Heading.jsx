@@ -1,21 +1,25 @@
 import './Heading.css'
 
-const Heading = ({board}) => {
+const Heading = ({ score }) => {
     return (
-        <div className="heading">
-            <h1 className="title">2048</h1>
-            <div className="scores-container">
-                <div className="score-container">
-                    <h4>SCORE</h4>
-                    <h3>{board.score}</h3>
+        <div className='heading'>
+            <div className='left-column'>
+                <h1 className='title'>2048</h1>
+                <p className='game-intro'>Join the tiles, get to <strong>2048!</strong></p>
+                <a href='/' className='how-to-play-link'>How to play →</a>
+            </div>
+            <div className='rigth-column'>
+                <div className="scores-container">
+                    <div className="score-container">
+                        <h4>SCORE</h4>
+                        <h3>{score}</h3>
+                    </div>
+                    <div className="best-container">
+                        <h4>BEST</h4>
+                        <h3>{score === 0 ? '0' : score}</h3>
+                    </div>
                 </div>
-                <div className="best-container">
-                    <h4>BEST</h4>
-                    <h3>{board.score === 0 ? 0 : board.score}</h3>
-                </div>
-                <div className='above-game'>
-                    <p className='game-intro'>Join the tiles, get to <strong>2048!</strong></p>
-                </div>
+                <button className='restart-button'>New Game</button>
             </div>
         </div>
     )

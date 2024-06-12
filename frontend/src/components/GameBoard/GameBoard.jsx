@@ -49,8 +49,7 @@ const GameBoard = () => {
 
     return (
         <div className='container'>
-            <Heading board={board}/>
-            {/* <h2>Score: {score}</h2> */}
+            <Heading score={score}/>
             <div className="board">
                 {board.map((row, rowIndex) => (
                     <React.Fragment key={rowIndex}>
