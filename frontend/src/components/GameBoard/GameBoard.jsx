@@ -1,8 +1,8 @@
-// src/GameBoard.jsx
-
+import Heading from '../Heading'
 import React, { useState, useEffect } from 'react';
 import Board from '../../GameLogic';
 import '../../App';
+import './GameBoard.css'
 
 const GameBoard = () => {
     const [boardInstance] = useState(new Board());
@@ -48,9 +48,9 @@ const GameBoard = () => {
     };
 
     return (
-        <div>
-            <h1>2048</h1>
-            <h2>Score: {score}</h2>
+        <div className='container'>
+            <Heading board={board}/>
+            {/* <h2>Score: {score}</h2> */}
             <div className="board">
                 {board.map((row, rowIndex) => (
                     <React.Fragment key={rowIndex}>

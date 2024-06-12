@@ -1,0 +1,27 @@
+.heading {
+    display: block;
+    color: #776e65;
+    font-family: "Clear Sans", "Helvetica Neue", Arial, Helvetica, sans-serif;
+    font-size: 18px;
+}
+
+.scores-container {
+    float: right;
+    display: flex;
+
+}
+
+.score-container {
+    position: relative;
+    display: block;
+    background: #bbada0;
+    padding: 15px 25px;
+    font-size: 25px;
+    height: 25px;
+    line-height: 47px;
+    font-weight: bold;
+    border-radius: 3px;
+    color: white;
+    margin-top: 8px;
+    text-align: center;
+}
