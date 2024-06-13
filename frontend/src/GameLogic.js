@@ -57,6 +57,13 @@ class Board {
         return row;
     }
 
+    #won() {
+        for (let i = 0; i < this.board.length; i++) {
+            if(this.board[i].includes(2048))
+                this.won === true
+        }
+    }
+
     initializeBoard() {
         const maxDimension = Math.max(this.width, this.height);
         const amountOfNums = Math.ceil(maxDimension / 2);
@@ -74,6 +81,7 @@ class Board {
             this.board[i] = row;
         }
         this.#addRandomTile();
+        this.#won();
     }
 
     //this moves Up or Down depending on the argument passed
