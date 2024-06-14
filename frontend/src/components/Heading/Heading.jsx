@@ -1,6 +1,7 @@
 import './Heading.css'
 
-const Heading = ({ score }) => {
+const Heading = ({ score, bestScore, onNewGame }) => {
+
     return (
         <div className='heading'>
             <div className='left-column'>
@@ -16,10 +17,10 @@ const Heading = ({ score }) => {
                     </div>
                     <div className="best-container">
                         <h4>BEST</h4>
-                        <h3>{score === 0 ? '0' : score}</h3>
+                        <h3>{bestScore}</h3>
                     </div>
                 </div>
-                <button className='restart-button'>New Game</button>
+                <button className='restart-button' onClick={onNewGame}>New Game</button>
             </div>
         </div>
     )

@@ -8,6 +8,9 @@ const GameBoard = () => {
     const [boardInstance] = useState(new Board());
     const [board, setBoard] = useState(boardInstance.board);
     const [score, setScore] = useState(boardInstance.score);
+    const [bestScore, setBestScore] = useState(() => parseInt(localStorage.getItem('bestScore') || 0))
+    const [gameOver, setGameOver] = useState(false);
+    const [gameWon, setGameWon] = useState(false);
 
     useEffect(() => {
         boardInstance.initializeBoard();
@@ -33,6 +36,17 @@ const GameBoard = () => {
         }
         setBoard([...boardInstance.board]);
         setScore(boardInstance.score);
+        if (boardInstance.score > bestScore) {
+            setBestScore(boardInstance.score);
+            localStorage.setItem('bestScore', boardInstance.score);
+        }
+
+        if (boardInstance.didIWon()) {
+            setGameWon(true);
+        }
+        if (boardInstance.didILost()) {
+            setGameOver(true);
+        }
     };
 
     const handleKeyUp = (e) => {
@@ -58,6 +72,14 @@ const GameBoard = () => {
         }
     }
 
+    const resetGame = () => {
+        boardInstance.initializeBoard();
+        setBoard([...boardInstance.board]);
+        setScore(boardInstance.score);
+        setGameOver(false);
+        setGameWon(false);
+    }
+
     useEffect(() => {
         window.addEventListener('keydown', handleKeyDown);
         window.addEventListener('keyup', handleKeyUp)
@@ -74,7 +96,7 @@ const GameBoard = () => {
 
     return (
         <div className='container'>
-            <Heading score={score}/>
+            <Heading score={score} bestScore={bestScore} onNewGame={resetGame}/>
             <div className="board">
                 {board.map((row, rowIndex) => (
                     <React.Fragment key={rowIndex}>

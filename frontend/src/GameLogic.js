@@ -104,7 +104,7 @@ class Board {
         const maxDimension = Math.max(this.width, this.height);
         const amountOfNums = Math.ceil(maxDimension / 2);
 
-        for (let i = 0; i < amountOfNums; i++) {
+        for (let i = 0; i < amountOfNums/2; i++) {
             this.#addRandomTile();
         }
     }
