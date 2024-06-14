@@ -1,0 +1,76 @@
+.heading {
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    color: #776e65;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 18px;
+    padding-left: 262px;
+    padding-right: 140px;
+}
+
+.left-column {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: center;
+}
+
+.title {
+    font-size: 80px;
+    font-weight: bold;
+    margin: 0;
+    display: block;
+    float: left;
+}
+
+.how-to-play-link {
+    display: inline-block;
+    color: #776e65;
+    font-weight: bold;
+    text-decoration: underline;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+.how-to-play-link:hover {
+    color: #f77c5f;
+}
+
+.game-intro {
+    line-height: 1.2;
+    margin-bottom: 0;
+    margin-right: 10px;
+}
+
+.restart-button {
+    background: #8f7a66;
+    border-radius: 3px;
+    padding: 10px 20px;
+    color: #f9f6f2;
+    height: 40px;
+    cursor: pointer;
+    display: block;
+    text-align: center;
+    flex-shrink: 0;
+    font-weight: bold;
+}
+
+.right-column {
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    justify-content: center;
+}
+
+.scores-container {
+    display: flex;
+    flex-direction: row;
+}
+
+.score-container {
+    position: relative;
+    display: block;
+    background: #bbada0;
+    font-size: 25px;
+    
+}
