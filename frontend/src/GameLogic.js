@@ -60,7 +60,7 @@ class Board {
     didIWon() {
         if (!this.won) {
             for (let i = 0; i < this.board.length; i++) {
-                if (this.board[i].includes(16)) {
+                if (this.board[i].includes(2048)) {
                     this.won = true;
                     return alert("Congratulations, you Won!!! \n Keep playing and now go for the 8192");
                 }
