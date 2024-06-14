@@ -35,10 +35,31 @@ const GameBoard = () => {
         setScore(boardInstance.score);
     };
 
+    const handleKeyUp = (e) => {
+        switch(e.key) {
+            case 'ArrowUp':
+                boardInstance.didIWon();
+                break;
+            case 'ArrowDown':
+                boardInstance.didIWon();
+                break;
+            case 'ArrowLeft':
+                boardInstance.didIWon();
+                break;
+            case 'ArrowRight':
+                boardInstance.didIWon();
+                break;
+            default:
+                return;
+        }
+    }
+
     useEffect(() => {
         window.addEventListener('keydown', handleKeyDown);
+        window.addEventListener('keyup', handleKeyUp)
         return () => {
             window.removeEventListener('keydown', handleKeyDown);
+            window.removeEventListener('keyup', handleKeyUp)
         };
     }, []);
 
