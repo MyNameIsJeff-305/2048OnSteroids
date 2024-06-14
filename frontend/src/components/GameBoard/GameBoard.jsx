@@ -39,15 +39,19 @@ const GameBoard = () => {
         switch(e.key) {
             case 'ArrowUp':
                 boardInstance.didIWon();
+                boardInstance.didILost();
                 break;
             case 'ArrowDown':
                 boardInstance.didIWon();
+                boardInstance.didILost();
                 break;
             case 'ArrowLeft':
                 boardInstance.didIWon();
+                boardInstance.didILost();
                 break;
             case 'ArrowRight':
                 boardInstance.didIWon();
+                boardInstance.didILost();
                 break;
             default:
                 return;

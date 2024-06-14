@@ -30,42 +30,74 @@ class Board {
     }
 
     #slideLeft(row) {
-        row = row.filter(val => val); // Remove zeros
-        for (let i = 0; i < row.length - 1; i++) {
-            if (row[i] === row[i + 1]) {
-                row[i] *= 2;
-                row[i + 1] = 0;
-                this.score += row[i]
+        let newRow = row.filter(val => val); // Remove zeros
+        for (let i = 0; i < newRow.length - 1; i++) {
+            if (newRow[i] === newRow[i + 1]) {
+                newRow[i] *= 2;
+                newRow[i + 1] = 0;
+                this.score += newRow[i];
             }
         }
-        row = row.filter(val => val); // Remove new zeros
-        while (row.length < this.width) row.push(0); // Add zeros to the end
-        return row;
+        newRow = newRow.filter(val => val); // Remove new zeros
+        while (newRow.length < this.width) newRow.push(0); // Add zeros to the end
+        return newRow;
     }
 
     #slideRight(row) {
-        row = row.filter(val => val); // Remove zeros
-        for (let i = row.length - 1; i > 0; i--) {
-            if (row[i] === row[i - 1]) {
-                row[i] *= 2;
-                this.score += row[i]
-                row[i - 1] = 0;
+        let newRow = row.filter(val => val); // Remove zeros
+        for (let i = newRow.length - 1; i > 0; i--) {
+            if (newRow[i] === newRow[i - 1]) {
+                newRow[i] *= 2;
+                this.score += newRow[i];
+                newRow[i - 1] = 0;
             }
         }
-        row = row.filter(val => val); // Remove new zeros
-        while (row.length < this.width) row.unshift(0); // Add zeros to the start
-        return row;
+        newRow = newRow.filter(val => val); // Remove new zeros
+        while (newRow.length < this.width) newRow.unshift(0); // Add zeros to the start
+        return newRow;
     }
 
     didIWon() {
-        if (this.won === false) {
+        if (!this.won) {
             for (let i = 0; i < this.board.length; i++) {
                 if (this.board[i].includes(16)) {
                     this.won = true;
-                    return alert("Congratulations, you Won!!! \n Keep playing and now go for the 8192")
+                    return alert("Congratulations, you Won!!! \n Keep playing and now go for the 8192");
                 }
             }
         }
+    }
+
+    didILost() {
+        for (let y = 0; y < this.height; y++) {
+            for (let x = 0; x < this.width; x++) {
+                if (this.board[y][x] === 0) {
+                    return false; // There is at least one empty space
+                }
+                if (x !== this.width - 1 && this.board[y][x] === this.board[y][x + 1]) {
+                    return false; // There is a mergeable horizontal pair
+                }
+                if (y !== this.height - 1 && this.board[y][x] === this.board[y + 1][x]) {
+                    return false; // There is a mergeable vertical pair
+                }
+            }
+        }
+        return alert("Game Over! No more possible moves."); // No moves left
+    }
+
+    #compareBoards(board1, board2) {
+        for (let y = 0; y < board1.length; y++) {
+            for (let x = 0; x < board1[y].length; x++) {
+                if (board1[y][x] !== board2[y][x]) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    #copyBoard() {
+        return this.board.map(row => row.slice());
     }
 
     initializeBoard() {
@@ -77,19 +109,24 @@ class Board {
         }
     }
 
-    //This moves Right or Left depending on the argument passed
+    // This moves Right or Left depending on the argument passed
     moveXAxis(direction) {
+        const oldBoard = this.#copyBoard();
 
         for (let i = 0; i < this.height; i++) {
             let row = this.board[i];
             row = direction === 1 ? this.#slideRight(row) : this.#slideLeft(row);
             this.board[i] = row;
         }
-        this.#addRandomTile();
+
+        if (!this.#compareBoards(oldBoard, this.board)) {
+            this.#addRandomTile();
+        }
     }
 
-    //this moves Up or Down depending on the argument passed
+    // This moves Up or Down depending on the argument passed
     moveYAxis(direction) {
+        const oldBoard = this.#copyBoard();
 
         for (let i = 0; i < this.width; i++) {
             let column = this.board.map(row => row[i]);
@@ -98,9 +135,11 @@ class Board {
                 this.board[j][i] = column[j];
             }
         }
-        this.#addRandomTile();
-    }
 
+        if (!this.#compareBoards(oldBoard, this.board)) {
+            this.#addRandomTile();
+        }
+    }
 }
 
 export default Board;
